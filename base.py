@@ -6,7 +6,7 @@ TEST_DIR = os.path.expanduser("~/.config/SwordNode/plugins/Plugins")
 
 def run(cmd):
 	if cmd == 'ls':
-		res = os.popen('ls %s' % os.path.dirname(__file__)).read()
+		res = os.popen('cd %s && ls ' % TEST_DIR).read()
 	elif cmd == 'update':
 		res = os.popen('cd %s && git pull origin master' % TEST_DIR).read()
 	elif cmd == 'updateF':
