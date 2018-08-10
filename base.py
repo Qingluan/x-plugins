@@ -8,9 +8,9 @@ def run(cmd):
 	if cmd == 'ls':
 		res = os.popen('cd %s && ls ' % TEST_DIR).read()
 	elif cmd == 'update':
-		res = os.popen('cd %s && git pull origin master' % TEST_DIR).read()
+		res = os.popen('cd %s && git add -A && git commit -m "commit 1" && git pull origin master' % TEST_DIR).read()
 	elif cmd == 'updateF':
-		res = os.popen('cd %s && git pull -f origin master' % TEST_DIR).read()
+		res = os.popen('cd %s && git add -A && git commit -m "commit 1" && git pull -f origin master' % TEST_DIR).read()
 	elif cmd == 'ps':
 		res = os.popen("ps aux | grep -v grep").read()
 
