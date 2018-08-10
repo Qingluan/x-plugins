@@ -63,6 +63,15 @@ def login(phone, code):
 
 
 def run(cmd, phone=None, token=None, code=None):
+    """
+    args=set token=xxx:xxxxxx # set token init
+    args=set token=xxx:xxxxxx phone=xxxxxx code=xxxx # set token by auth telegram
+    args=auth token=xxx:xxxxxx phone=xxxxxx # will lei server send code to your tele
+    args=login token=xxx:xxxxx phone=xxxxx code=xxxxxx  #login
+    
+
+
+    """
     if cmd == 'set':
         if phone and token and code:
             connect(phone, token)
@@ -80,12 +89,14 @@ def run(cmd, phone=None, token=None, code=None):
         send_code(phone)
         if code:
             login(phone, code)
+        return 'send code to your telegram device.'
     elif cmd == 'login':
         c = Cache(DB_PATH)
         if not c.query_one(token=token.strip()):
             return "not token : %s found in db." % token
         connect(phone, token)
-        login(phone, code)
+        return login(phone, code)
+
 
 
 
