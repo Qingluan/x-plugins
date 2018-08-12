@@ -20,6 +20,7 @@ DB_PATH = os.path.expanduser("~/.db.sql")
 
 
 client = None
+loop = None
 
 class Token(dbobj):
     pass
@@ -30,7 +31,7 @@ def connect(phone, token):
     api_id, api_hash = token.split(":")
     api_id = int(api_id)
     print(phone,api_id)
-    client = TelegramClient('session', api_id=api_id, api_hash=api_hash)
+    client = TelegramClient('session', api_id=api_id, api_hash=api_hash, loop=loop)
     client.connect()
     return client
 
