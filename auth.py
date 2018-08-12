@@ -83,7 +83,7 @@ def run(cmd, phone=None, token=None, code=None):
         return 'set token ok'
     elif cmd == 'auth':
         c = Cache(DB_PATH)
-        if not c.query_one(token=token.strip()):
+        if not c.query_one(Token, token=token.strip()):
             return "not token : %s found in db." % token
         connect(phone, token)
         send_code(phone)
