@@ -64,7 +64,7 @@ def login(phone, code):
     return 'auth fail'
 
 
-def run(cmd, phone=None, token=None, code=None):
+def run(cmd, phone=None, token=None, code=None, loop=None):
     """
     args=set token=xxx:xxxxxx # set token init
     args=set token=xxx:xxxxxx phone=xxxxxx code=xxxx # set token by auth telegram
@@ -74,6 +74,8 @@ def run(cmd, phone=None, token=None, code=None):
 
 
     """
+    global loop
+    loop = loop
     if cmd == 'set':
         if phone and token and code:
             connect(phone, token)
