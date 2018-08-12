@@ -29,6 +29,7 @@ def connect(phone, token):
     global client
     api_id, api_hash = token.split(":")
     api_id = int(api_id)
+    print(phone,api_id)
     client = TelegramClient('session', api_id=api_id, api_hash=api_hash)
     client.connect()
     return client
