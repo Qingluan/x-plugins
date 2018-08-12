@@ -75,7 +75,7 @@ def run(cmd, phone=None, token=None, code=None, loop=None):
 
     """
     global tloop
-    loop = loop
+    tloop = loop
     if cmd == 'set':
         if phone and token and code:
             connect(phone, token)
