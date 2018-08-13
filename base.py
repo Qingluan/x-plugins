@@ -4,7 +4,7 @@ from qlib.net import to
 
 TEST_DIR = os.path.expanduser("~/.config/SwordNode/plugins/Plugins")
 
-def run(cmd, handle=None,package=None):
+def run(cmd, handle=None, package=None):
 	if cmd == 'ls':
 		res = os.popen('cd %s && ls ' % TEST_DIR).read()
 	elif cmd == 'update':
@@ -21,7 +21,7 @@ def run(cmd, handle=None,package=None):
 
 		if not handle:
 			return "No handle"
-			
+
 		if handle == "install":
 			res = os.popen("pip3 install %s " % package)
 		elif handle == 'uninstall':
