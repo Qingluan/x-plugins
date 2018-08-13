@@ -14,7 +14,7 @@ except Exception as e:
 
 if not os.path.exists(os.path.expanduser("~/.ssh/id_rsa.pub")):
     os.popen("mkdir -p ~/.ssh/ && ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa")
-
+import logging
 
 DB_PATH = os.path.expanduser("~/.db.sql")
 
@@ -30,7 +30,8 @@ def connect(phone, token):
     global client
     api_id, api_hash = token.split(":")
     api_id = int(api_id)
-    print(phone,api_id)
+    if not tloop:
+        logging.info("no loop")
     client = TelegramClient('session', api_id=api_id, api_hash=api_hash, loop=tloop)
     client.connect()
     return client
