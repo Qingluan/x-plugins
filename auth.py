@@ -32,6 +32,8 @@ def connect(phone, token):
     api_id = int(api_id)
     if not tloop:
         logging.info("no loop")
+    else:
+        logging.info("loop")
     client = TelegramClient('session', api_id=api_id, api_hash=api_hash, loop=tloop)
     client.connect()
     return client
