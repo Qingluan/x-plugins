@@ -15,6 +15,7 @@ except Exception as e:
 if not os.path.exists(os.path.expanduser("~/.ssh/id_rsa.pub")):
     os.popen("mkdir -p ~/.ssh/ && ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa")
 import logging
+logging.basicConfig(level=logging.INFO)
 
 DB_PATH = os.path.expanduser("~/.db.sql")
 
