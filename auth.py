@@ -1,13 +1,13 @@
 import os
 from qlib.data import dbobj, Cache
 try:
-    from telethon import TelegramClient, sync
+    from telethon import TelegramClient
     from telethon.errors import SessionPasswordNeededError
     from telethon.tl.types import  MessageMediaDocument
     from telethon.utils import get_display_name
 except Exception as e:
     os.popen("pip3 install telethon && sleep 1").read()
-    from telethon import TelegramClient, sync
+    from telethon import TelegramClient
     from telethon.errors import SessionPasswordNeededError
     from telethon.tl.types import  MessageMediaDocument
     from telethon.utils import get_display_name
