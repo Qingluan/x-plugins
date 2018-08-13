@@ -27,15 +27,12 @@ class Token(dbobj):
     pass
 
 
-def connect(phone, token):
+def connect(phone, token,loop=None):
     global client
     api_id, api_hash = token.split(":")
     api_id = int(api_id)
-    if not tloop:
-        logging.info("no loop")
-    else:
-        logging.info("loop")
-    client = TelegramClient('session', api_id=api_id, api_hash=api_hash, loop=tloop)
+    
+    client = TelegramClient('session', api_id=api_id, api_hash=api_hash, loop=loop)
     client.connect()
     return client
 
@@ -79,10 +76,16 @@ def run(cmd, phone=None, token=None, code=None, loop=None):
 
     """
     global tloop
+    
+    if not loop:
+        logging.info("no loop")
+    else:
+        logging.info("loop")
+
     tloop = loop
     if cmd == 'set':
         if phone and token and code:
-            connect(phone, token)
+            connect(phone, token, loop)
             send_code(phone)
             login(phone, code)
 
@@ -93,7 +96,7 @@ def run(cmd, phone=None, token=None, code=None, loop=None):
         c = Cache(DB_PATH)
         if not c.query_one(Token, token=token.strip()):
             return "not token : %s found in db." % token
-        connect(phone, token)
+        connect(phone, token, loop)
         send_code(phone)
         if code:
             login(phone, code)
@@ -102,7 +105,7 @@ def run(cmd, phone=None, token=None, code=None, loop=None):
         c = Cache(DB_PATH)
         if not c.query_one(token=token.strip()):
             return "not token : %s found in db." % token
-        connect(phone, token)
+        connect(phone, token,loop)
         return login(phone, code)
 
 
