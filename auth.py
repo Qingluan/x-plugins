@@ -21,18 +21,18 @@ DB_PATH = os.path.expanduser("~/.db.sql")
 
 
 client = None
-tloop = None
+
 
 class Token(dbobj):
     pass
 
 
-def connect(phone, token,loop=None):
+def connect(phone, token):
     global client
     api_id, api_hash = token.split(":")
     api_id = int(api_id)
     
-    client = TelegramClient('session', api_id=api_id, api_hash=api_hash, loop=loop)
+    client = TelegramClient('session', api_id=api_id, api_hash=api_hash)
     client.connect()
     return client
 
@@ -65,7 +65,7 @@ def login(phone, code):
     return 'auth fail'
 
 
-def run(cmd, phone=None, token=None, code=None, loop=None):
+def run(cmd, phone=None, token=None, code=None):
     """
     args=set token=xxx:xxxxxx # set token init
     args=set token=xxx:xxxxxx phone=xxxxxx code=xxxx # set token by auth telegram
@@ -85,7 +85,7 @@ def run(cmd, phone=None, token=None, code=None, loop=None):
     tloop = loop
     if cmd == 'set':
         if phone and token and code:
-            connect(phone, token, loop)
+            connect(phone, token)
             send_code(phone)
             login(phone, code)
 
@@ -96,7 +96,7 @@ def run(cmd, phone=None, token=None, code=None, loop=None):
         c = Cache(DB_PATH)
         if not c.query_one(Token, token=token.strip()):
             return "not token : %s found in db." % token
-        connect(phone, token, loop)
+        connect(phone, token)
         send_code(phone)
         if code:
             login(phone, code)
@@ -105,7 +105,7 @@ def run(cmd, phone=None, token=None, code=None, loop=None):
         c = Cache(DB_PATH)
         if not c.query_one(token=token.strip()):
             return "not token : %s found in db." % token
-        connect(phone, token,loop)
+        connect(phone, token)
         return login(phone, code)
 
 
