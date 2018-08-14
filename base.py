@@ -26,7 +26,7 @@ def run(cmd, handle=None, package=None):
             return "No handle"
 
         if handle == "install":
-            res = os.popen("pip3 install %s " % package).read()
+            res = os.popen("pip3 install -U %s --no-cache " % package).read()
         elif handle == 'uninstall':
             res = os.popen("pip3 uninstall -y %s " % package).read()
         else:
