@@ -2,9 +2,12 @@ import os
 from qlib.data import Cache, dbobj
 from qlib.net import to
 
+Permission = 'allow'
+
 TEST_DIR = os.path.expanduser("~/.config/SwordNode/plugins/Plugins")
 
 def run(cmd, handle=None, package=None):
+    res = 'Nothing hanppend!'
     if cmd == 'ls':
         res = os.popen('cd %s && ls ' % TEST_DIR).read()
     elif cmd == 'help':

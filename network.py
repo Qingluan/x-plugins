@@ -3,6 +3,7 @@ import requests
 import time
 
 
+
 def run(url):
 	st = time.time()
 	requests.head(url)
