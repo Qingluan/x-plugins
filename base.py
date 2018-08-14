@@ -2,7 +2,7 @@ import os
 from qlib.data import Cache, dbobj
 from qlib.net import to
 
-Permission = 'auth'
+Permission = 'auth2'
 
 TEST_DIR = os.path.expanduser("~/.config/SwordNode/plugins/Plugins")
 
